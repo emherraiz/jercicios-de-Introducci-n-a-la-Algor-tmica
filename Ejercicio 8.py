@@ -37,3 +37,15 @@ else:
 # Los intereses y el tiempo nos darán ganancias sobre las cuales aplicaremos cada año el IRPF
 Interes = float(input('Introduce el interés mensual en tanto por ciento que recibe nuestro producto'))
 Tiempo = int(input('Tiempo que mantenemos nuestra inversión'))
+
+Precio_de_partida = Precio
+Precio_temp = Precio - (Precio*Iva)
+Precio = Precio_temp
+for i in range(Tiempo):
+    Precio = Precio + (Precio*(Interes/100))
+    if i % 12 == 0:
+        Ganancias = Precio - Precio_temp
+        Precio = IRPF(Precio, Ganancias)
+        Precio_temp = Precio
+print(f'El precio final es de {round(Precio, 2)}')
+print(f'Obteniendo un beneficio de {round(Precio - Precio_de_partida, 2)}')
